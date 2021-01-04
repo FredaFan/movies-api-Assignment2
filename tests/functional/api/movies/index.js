@@ -2,48 +2,24 @@ import chai from "chai";
 import request from "supertest";
 import dotenv from 'dotenv';
 const mongoose = require("mongoose");
-import User from "../../../../api/users/userModel";
+
 
 const expect = chai.expect;
 dotenv.config();
-let db;
+
 let api;
-let token = "eyJhbGciOiJIUzI1NiJ9.dXNlcjE.FmYria8wq0aFDHnzYWhKQrhF5BkJbFNN1PqNyNQ7V4M";
+let token
 const sampleMovie = {
   id: 337401,
   title: "Mulan",
 };
-const users = [
-  {
-    username: "user1",
-    password: "test1",
-  },
-  {
-    username: "user2",
-    password: "test2",
-  },
-];
-describe("Movies endpoint", () => {
-  before(() => {
-    mongoose.connect(process.env.mongoDB, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    db = mongoose.connection;
-  });
 
-  after(async () => {
-    try {
-      await db.dropDatabase();
-    } catch (error) {
-      console.log(error);
-    }
-  });
+describe("Movies endpoint", () => {
+  
   beforeEach(async () => {
     try {
       api = require("../../../../index");
-      await User.deleteMany({});
-      await User.collection.insertMany(users);
+      
     } catch (err) {
       console.error(`failed to Load user Data: ${err}`);
     }
@@ -68,6 +44,20 @@ describe("Movies endpoint", () => {
       });
     });
     describe("when it was authorized", () => {
+      beforeEach(async () => {
+        request (api)
+        .post("/api/users")
+        .send({
+          username: "user1",
+          password: "test1",
+
+
+        })
+        .expect(200)
+        .then(res => {
+          token = res.body.token;
+       });
+      });
       it("should return 20 movies and a status 200", () => {
         request(api)
           .get("/api/movies")

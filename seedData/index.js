@@ -1,8 +1,10 @@
 import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import genreModel from '../api/genres/genreModel';
+import personModel from '../api/people/personModel';
 import {movies} from './movies.js';
 import {genres} from './genres';
+import {people} from './people';
 const users = [
   {
     'username': 'user1',
@@ -47,5 +49,17 @@ export async function loadUsers() {
       console.info(`${genres.length} Genres were successfully stored.`);
     } catch (err) {
       console.error(`failed to Load genres Data: ${err}`);
+    }
+  }
+
+  export async function loadPeople() {
+    console.log('load person data');
+    
+    try {
+      await personModel.deleteMany();
+      await personModel.collection.insertMany(people);
+      console.info(`${people.length} People were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load people Data: ${err}`);
     }
   }

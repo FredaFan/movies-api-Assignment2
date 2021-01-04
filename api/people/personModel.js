@@ -9,7 +9,7 @@ const PersonSchema = new Schema({
   id: { type: Number, required: true, unique: true },
   known_for: [{
 
-    id: { type: Number, required: true, unique: true },
+  
     media_type: { type: String },
 
     overview: { type: String },

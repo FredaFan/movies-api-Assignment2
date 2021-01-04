@@ -8,6 +8,15 @@ import './db';
 import {loadUsers, loadMovies} from './seedData';
 import usersRouter from './api/users';
 import genreRouter from './api/genres';
+import loglevel from 'loglevel';
+if (process.env.NODE_ENV === 'test') {
+  loglevel.setLevel('warn')
+ } else {
+  loglevel.setLevel('info')
+ }
+if (process.env.SEED_DB === 'true' && process.env.NODE_ENV === 'development') {
+  loadUsers();
+}
 dotenv.config();
 
 const app = express();
@@ -37,12 +46,10 @@ app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRou
 app.use('/api/users', usersRouter);
 app.use('/api/genres', genreRouter);
 app.use(errHandler);
-app.listen(port, () => {
-  console.info(`Server running at ${port}`);
-});
-if (process.env.SEED_DB) {
-  loadUsers();
-  loadMovies();
-}
 
-export default app;
+let server = app.listen(port, () => {
+  loglevel.info(`Server running at ${port}`);
+});
+
+
+module.exports = server

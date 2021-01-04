@@ -14,6 +14,11 @@ const sampleMovie = {
   title: "Mulan",
 };
 
+const sampleReview = {
+  author: "msbreviews",
+  content: "If you enjoy reading my Spoiler-Free reviews, please follow my blog @\r\nhttps://www.msbreviews.com\r\n\r\nAs you might now",
+};
+
 describe("Movies endpoint", () => {
   
   beforeEach(async () => {
@@ -154,6 +159,47 @@ describe("Movies endpoint", () => {
     });
   });*/
 
+
+  describe("GET /movies/:id/reviews", () => {
+    describe("when it was unauthorized", () => {
+      it("should return errors", () => {
+        return request(api)
+
+          .get(`/api/movies/${sampleMovie.id}/reviews`)
+          .set("Accept", "application/json")
+          .then((res) => {
+            expect(res.body).to.be.empty;
+          });
+
+
+      });
+    });
+    describe("when it was authorized", () => {
+      describe("when the id is valid", () => {
+        it("should return the matching movie", () => {
+          request(api)
+
+            .get(`/api/movies/${sampleMovie.id}/reviews`)
+            .set("Accept", "application/json")
+            .set("Authorization", token)
+            .expect(200)
+            .then((res) => {
+              expect(res.body).to.have.property("author", sampleReview.author);
+            });
+        });
+      });
+      describe("when the id is invalid", () => {
+        it("should return the NOT found message", () => {
+          request(api)
+
+            .get("/api/movies/xxx/reviews")
+            .set("Accept", "application/json")
+            .set("Authorization", token)
+            .expect(500);
+        });
+      });
+    });
+  });
 
 
 

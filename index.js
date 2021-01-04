@@ -5,7 +5,7 @@ import express from 'express';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
-import {loadUsers, loadMovies} from './seedData';
+import {loadUsers, loadMovies, loadGenres} from './seedData';
 import usersRouter from './api/users';
 import genreRouter from './api/genres';
 import loglevel from 'loglevel';
@@ -16,6 +16,8 @@ if (process.env.NODE_ENV === 'test') {
  }
 if (process.env.SEED_DB === 'true' && process.env.NODE_ENV === 'development') {
   loadUsers();
+  loadMovies();
+  loadGenres();
 }
 dotenv.config();
 

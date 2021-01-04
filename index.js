@@ -44,3 +44,5 @@ if (process.env.SEED_DB) {
   loadUsers();
   loadMovies();
 }
+
+export default app;

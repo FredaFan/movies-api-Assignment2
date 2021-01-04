@@ -29,7 +29,7 @@ stages:
 install_dependencies:
   stage: install
   script:
-    - npm  install
+    - npm  ci
 
 Build_api:
   stage: build

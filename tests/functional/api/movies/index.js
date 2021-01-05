@@ -157,7 +157,7 @@ describe("Movies endpoint", () => {
 
 
     });
-  });*/
+  }); */
 
 
   describe("GET /movies/:id/reviews", () => {

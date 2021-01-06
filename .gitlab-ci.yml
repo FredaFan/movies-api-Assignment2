@@ -64,7 +64,7 @@ deploy_production_manual:
     - apt-get install -y ruby-dev
     - gem install dpl
   script:  
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME_STAGING --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME_PRODUCTION --api-key=$HEROKU_API_KEY
     - echo "Deployed to production server"
   when: manual
 
@@ -78,6 +78,6 @@ deploy_production:
     - apt-get install -y ruby-dev
     - gem install dpl
   script:  
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME_STAGING --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=$HEROKU_APP_NAME_PRODUCTION --api-key=$HEROKU_API_KEY
     - echo "Deployed to production server"
   

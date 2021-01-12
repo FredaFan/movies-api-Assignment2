@@ -36,7 +36,7 @@ describe("Movies endpoint", () => {
 
 
   describe("GET /movies ", () => {
-    describe("when it was unauthorized", () => {
+    /*describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
           .get(`/api/movies`)
@@ -47,7 +47,7 @@ describe("Movies endpoint", () => {
 
 
       });
-    });
+    });*/
     describe("when it was authorized", () => {
       beforeEach(async () => {
         request (api)
@@ -80,7 +80,7 @@ describe("Movies endpoint", () => {
   });
 
   describe("GET /movies/:id", () => {
-    describe("when it was unauthorized", () => {
+    /*describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
 
@@ -92,7 +92,7 @@ describe("Movies endpoint", () => {
 
 
       });
-    });
+    });*/
     describe("when it was authorized", () => {
       describe("when the id is valid", () => {
         it("should return the matching movie", () => {
@@ -161,7 +161,7 @@ describe("Movies endpoint", () => {
 
 
   describe("GET /movies/:id/reviews", () => {
-    describe("when it was unauthorized", () => {
+    /*describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
 
@@ -173,7 +173,7 @@ describe("Movies endpoint", () => {
 
 
       });
-    });
+    });*/
     describe("when it was authorized", () => {
       describe("when the id is valid", () => {
         it("should return the matching movie", () => {

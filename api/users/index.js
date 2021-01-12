@@ -76,6 +76,26 @@ router.post('/:userName/favourites', async (req, res, next) => {
 
   
 });
+
+/*router.post('/:userName/flags', async (req, res, next) => {
+  const newFlag = req.body.id;
+  const userName = req.params.userName;
+  const movie = await movieModel.findByMovieDBId(newFlag);
+  
+  const user = await User.findByUserName(userName).catch(next);
+  if (!user) return res.status(401).json({ code: 401, msg: 'User not found.' });
+  if (user.flags.indexOf(movie._id)===-1){
+    await user.flags.push(movie._id);
+  await user.save(); 
+  res.status(201).json(user); 
+  }else{
+    return res.status(401).json({ code: 401, msg: 'The favourites movie has existed in.' });
+  }
+  
+  
+
+  
+});*/
 router.get('/:userName/favourites', (req, res, next) => {
   const userName = req.params.userName;
   User.findByUserName(userName).populate('favourites').then(

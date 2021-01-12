@@ -2,9 +2,11 @@ import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
 import genreModel from '../api/genres/genreModel';
 import personModel from '../api/people/personModel';
+import ucmovieModel from '../api/upcomingMovies/ucmovieModel';
 import {movies} from './movies.js';
 import {genres} from './genres';
 import {people} from './people';
+import {ucmovies} from './ucmovies';
 const users = [
   {
     'username': 'user1',
@@ -61,5 +63,17 @@ export async function loadUsers() {
       console.info(`${people.length} People were successfully stored.`);
     } catch (err) {
       console.error(`failed to Load people Data: ${err}`);
+    }
+  }
+
+  export async function loadUcmovies() {
+    console.log('load upcoming movies data');
+    
+    try {
+      await ucmovieModel.deleteMany();
+      await ucmovieModel.collection.insertMany(ucmovies);
+      console.info(`${ucmovies.length} Upcoming movies were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load upcoming movies Data: ${err}`);
     }
   }

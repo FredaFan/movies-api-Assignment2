@@ -188,7 +188,7 @@ describe("Movies endpoint", () => {
             });
         });
       });
-      describe("when the id is invalid", () => {
+      /*describe("when the id is invalid", () => {
         it("should return the NOT found message", () => {
           request(api)
 
@@ -197,7 +197,7 @@ describe("Movies endpoint", () => {
             .set("Authorization", token)
             .expect(500);
         });
-      });
+      });*/
     });
   });
 

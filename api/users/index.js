@@ -20,11 +20,22 @@ router.post('/', async (req, res, next) => {
     });
   }
   if (req.query.action === 'register') {
-    await User.create(req.body).catch(next);    
-    res.status(201).json({
-      code: 201,
-      msg: 'Successful created new user.',
-    });
+    var validation = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+    var result = validation.test(req.body.password);
+    if(result){
+      await User.create(req.body).catch(next);    
+      res.status(201).json({
+        code: 201,
+        msg: 'Successful created new user.',
+      });
+    }
+    else {
+      res.status(401).json({
+        code: 401,
+        msg: 'Registration and invalidation failed. Wrong password.'
+      });
+    }
+    
   } else {
     const user = await User.findByUserName(req.body.username).catch(next);
       if (!user) return res.status(401).json({ code: 401, msg: 'Authentication failed. User not found.' });
@@ -68,6 +79,7 @@ router.post('/:userName/favourites', async (req, res, next) => {
     await user.favourites.push(movie._id);
   await user.save(); 
   res.status(201).json(user); 
+  
   }else{
     return res.status(401).json({ code: 401, msg: 'The favourites movie has existed in.' });
   }
@@ -76,8 +88,12 @@ router.post('/:userName/favourites', async (req, res, next) => {
 
   
 });
+  
+  
 
-/*router.post('/:userName/flags', async (req, res, next) => {
+  
+
+router.post('/:userName/flags', async (req, res, next) => {
   const newFlag = req.body.id;
   const userName = req.params.userName;
   const movie = await movieModel.findByMovieDBId(newFlag);
@@ -89,17 +105,24 @@ router.post('/:userName/favourites', async (req, res, next) => {
   await user.save(); 
   res.status(201).json(user); 
   }else{
-    return res.status(401).json({ code: 401, msg: 'The favourites movie has existed in.' });
+    return res.status(401).json({ code: 401, msg: 'The flag movie has existed in.' });
   }
   
   
 
   
-});*/
+});
 router.get('/:userName/favourites', (req, res, next) => {
   const userName = req.params.userName;
   User.findByUserName(userName).populate('favourites').then(
     user => res.status(201).json(user.favourites)
+  ).catch(next);
+});
+
+router.get('/:userName/flags', (req, res, next) => {
+  const userName = req.params.userName;
+  User.findByUserName(userName).populate('flags').then(
+    user => res.status(201).json(user.flagss)
   ).catch(next);
 });
 

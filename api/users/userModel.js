@@ -6,8 +6,9 @@ const Schema = mongoose.Schema;
   
 const UserSchema = new Schema({
     username: { type: String, unique: true, required: true},
-    password: {type: String, required: true },
-    favourites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]
+    password: {type: String , required: true},
+    favourites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}],
+    flags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movies'}]
   });
 
 UserSchema.statics.findByUserName = function (username) {
@@ -23,10 +24,6 @@ UserSchema.methods.comparePassword = function(passw, cb) {
     });
 };
 
-UserSchema.path('password').validate((password) => {
-    let val = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
-    return val.test(password);
-    });
 
 
 

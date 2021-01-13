@@ -21,6 +21,14 @@ const users = [
     password: "test2",
   },
 ];
+const sampleUser = {
+  "favourites": [],
+  "flags": [],
+  "_id": "5ffe500faf39630b28ca8f60",
+  "username": "user1",
+  "password": "$2a$10$52hddYMYKK1VOfR17QWSL.UpVH2T6Wsu.vFjft5/FP/R7M.v2wsv6",
+  "__v": 1
+};
 
 describe("Users endpoint", () => {
   before(() => {
@@ -70,7 +78,7 @@ describe("Users endpoint", () => {
 
   describe("POST / ", () => {
     
-  describe("when it was authorized", () => {
+  describe("POST /:users", () => {
     it("should return a 200 status and the confirmation message", () => {
         request(api)
         .post("/api/users")  
@@ -96,6 +104,32 @@ describe("Users endpoint", () => {
           expect(result).to.have.members(["user1", "user2", "user3"]);
         });
     });
+  });
+  describe("POST / :favorites", () => {
+    it("should return a 200 status and the confirmation message", () => {
+      request(api)
+      .post(`/api/users/${sampleUser.username}/favourites`)
+      .set("Accept", "application/json")   
+      .set("Authorization", "BEARER" + token)   
+      .send({
+        "id": 590706
+        
+      })       
+      .expect(200)
+      
+  });
+  after(() => {
+      request(api)
+      .get(`/api/users/${sampleUser.username}/favourites`)
+      .set("Accept", "application/json")
+      .set("Authorization", "BEARER" + token)
+      .expect(200)
+      .then((res) => {
+        expect(res.body).to.be.a("array");
+        
+      });
+  });
+
   });
 });
 });

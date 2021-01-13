@@ -97,9 +97,10 @@ router.post('/:userName/flags', async (req, res, next) => {
   const newFlag = req.body.id;
   const userName = req.params.userName;
   const movie = await movieModel.findByMovieDBId(newFlag);
-  
+  if (!movie) return res.status(401).json({ code: 401, msg: 'Movie is not found.' });
   const user = await User.findByUserName(userName).catch(next);
-  if (!user) return res.status(401).json({ code: 401, msg: 'User not found.' });
+  
+  if (!user) return res.status(401).json({ code: 401, msg: 'User is not found.' });
   if (user.flags.indexOf(movie._id)===-1){
     await user.flags.push(movie._id);
   await user.save(); 

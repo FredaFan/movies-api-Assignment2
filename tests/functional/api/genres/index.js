@@ -32,7 +32,7 @@ describe("Genres endpoint", () => {
   
   
     describe("GET /genres ", () => {
-      it("should return 18 genres and a status 200", () => {
+      it("should return 19 genres and a status 200", () => {
         request(api)
           .get("/api/genres")
           .set("Accept", "application/json")
@@ -41,7 +41,7 @@ describe("Genres endpoint", () => {
           .expect(200)
           .then(res => {
             expect(res.body).to.be.a("array");
-            expect(res.body.length).to.equal(18);
+            expect(res.body.length).to.equal(19);
 
           });
       });

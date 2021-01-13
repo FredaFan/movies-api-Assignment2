@@ -23,7 +23,6 @@ const users = [
 ];
 const sampleUser = {
   "favourites": [],
-  "flags": [],
   "_id": "5ffe500faf39630b28ca8f60",
   "username": "user1",
   "password": "$2a$10$52hddYMYKK1VOfR17QWSL.UpVH2T6Wsu.vFjft5/FP/R7M.v2wsv6",
@@ -106,6 +105,21 @@ describe("Users endpoint", () => {
     });
   });
   describe("POST / :favorites", () => {
+    describe("When id is invalid", () => {
+      it("should return a 401 status and the error message", () => {
+        request(api)
+        .post(`/api/users/${sampleUser.username}/favourites`)
+
+        .set("Accept", "application/json")
+        .set("Authorization", token)
+        .send({
+          "id": 1111
+          
+        })       
+        .expect(500);
+    });
+  });
+  describe("When id is valid", () => {
     it("should return a 200 status and the confirmation message", () => {
       request(api)
       .post(`/api/users/${sampleUser.username}/favourites`)
@@ -129,7 +143,24 @@ describe("Users endpoint", () => {
         
       });
   });
-
+});
+describe("When favorite movie has  existed in", () => {
+  it("should return the error message", () => {
+    request(api)
+    .post(`/api/users/${sampleUser.username}/favourites`)
+    .set("Accept", "application/json")   
+    .set("Authorization", "BEARER" + token)   
+    .send({
+      "id": 590706
+      
+    })       
+    .send({
+      "id": 590706
+      
+    })   
+    .expect(500);
+  });
+});
   });
 });
 });

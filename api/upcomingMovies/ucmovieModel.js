@@ -31,9 +31,6 @@ const UCMovieSchema = new Schema({
   tagline: { type: String }
 });
 
-UCMovieSchema.statics.findByMovieDBId = function (id) {
-  return this.findOne({ id: id });
-};
 
 export default mongoose.model('Upcoming Movies', UCMovieSchema);
 

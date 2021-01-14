@@ -76,91 +76,109 @@ describe("Users endpoint", () => {
   });
 
   describe("POST / ", () => {
-    
-  describe("POST /:users", () => {
-    it("should return a 200 status and the confirmation message", () => {
-        request(api)
-        .post("/api/users")  
-        .set("Accept", "application/json")   
-        .set("Authorization", "BEARER" + token)   
-        .send({
-          username: "user3",
-          password: "test3",
-        })       
-        .expect(200)
-        
-    });
-    after(() => {
-        request(api)
-        .get("/api/users")
-        .set("Accept", "application/json")
-        .set("Authorization", "BEARER" + token)
-        .expect(200)
-        .then((res) => {
-          expect(res.body).to.be.a("array");
-          expect(res.body.length).to.equal(3);
-          let result = res.body.map((user) => user.username);
-          expect(result).to.have.members(["user1", "user2", "user3"]);
-        });
-    });
-  });
-  describe("POST / :favorites", () => {
-    describe("When id is invalid", () => {
-      it("should return a 401 status and the error message", () => {
-        request(api)
-        .post(`/api/users/${sampleUser.username}/favourites`)
+    describe("POST /:users", () => {
+      describe("When the password has validated successfully", () => {
 
-        .set("Accept", "application/json")
-        .set("Authorization", token)
-        .send({
-          "id": 1111
-          
-        })       
-        .expect(500);
+        it("should return a 200 status and the confirmation message", () => {
+          request(api)
+            .post("/api/users")
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .send({
+              username: "user3",
+              password: "test3",
+            })
+            .expect(200)
+
+        });
+        after(() => {
+          request(api)
+            .get("/api/users")
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .expect(200)
+            .then((res) => {
+              expect(res.body).to.be.a("array");
+              expect(res.body.length).to.equal(3);
+              let result = res.body.map((user) => user.username);
+              expect(result).to.have.members(["user1", "user2", "user3"]);
+            });
+        });
+      });
+      describe("When the password is not correct", () => {
+        it("should return a 401 status and the error message", () => {
+          request(api)
+            .post("/api/users")
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .send({
+              username: "user4",
+              password: "1111",
+            })
+            .expect(500)
+
+        });
+
+      });
+    });
+
+    describe("POST / :favourites", () => {
+      describe("When id is invalid", () => {
+        it("should return a 401 status and the error message", () => {
+          request(api)
+            .post(`/api/users/${sampleUser.username}/favourites`)
+
+            .set("Accept", "application/json")
+            .set("Authorization", token)
+            .send({
+              "id": 1111
+
+            })
+            .expect(500);
+        });
+      });
+      describe("When id is valid", () => {
+        it("should return a 200 status and the confirmation message", () => {
+          request(api)
+            .post(`/api/users/${sampleUser.username}/favourites`)
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .send({
+              "id": 590706
+
+            })
+            .expect(200)
+
+        });
+        after(() => {
+          request(api)
+            .get(`/api/users/${sampleUser.username}/favourites`)
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .expect(200)
+            .then((res) => {
+              expect(res.body).to.be.a("array");
+
+            });
+        });
+      });
+      describe("When favorite movie has existed in", () => {
+        it("should return the error message", () => {
+          request(api)
+            .post(`/api/users/${sampleUser.username}/favourites`)
+            .set("Accept", "application/json")
+            .set("Authorization", "BEARER" + token)
+            .send({
+              "id": 590706
+
+            })
+            .send({
+              "id": 590706
+
+            })
+            .expect(500);
+        });
+      });
     });
   });
-  describe("When id is valid", () => {
-    it("should return a 200 status and the confirmation message", () => {
-      request(api)
-      .post(`/api/users/${sampleUser.username}/favourites`)
-      .set("Accept", "application/json")   
-      .set("Authorization", "BEARER" + token)   
-      .send({
-        "id": 590706
-        
-      })       
-      .expect(200)
-      
-  });
-  after(() => {
-      request(api)
-      .get(`/api/users/${sampleUser.username}/favourites`)
-      .set("Accept", "application/json")
-      .set("Authorization", "BEARER" + token)
-      .expect(200)
-      .then((res) => {
-        expect(res.body).to.be.a("array");
-        
-      });
-  });
-});
-describe("When favorite movie has  existed in", () => {
-  it("should return the error message", () => {
-    request(api)
-    .post(`/api/users/${sampleUser.username}/favourites`)
-    .set("Accept", "application/json")   
-    .set("Authorization", "BEARER" + token)   
-    .send({
-      "id": 590706
-      
-    })       
-    .send({
-      "id": 590706
-      
-    })   
-    .expect(500);
-  });
-});
-  });
-});
 });

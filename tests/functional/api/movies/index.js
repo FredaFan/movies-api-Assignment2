@@ -20,11 +20,11 @@ const sampleReview = {
 };
 
 describe("Movies endpoint", () => {
-  
+
   beforeEach(async () => {
     try {
       api = require("../../../../index");
-      
+
     } catch (err) {
       console.error(`failed to Load user Data: ${err}`);
     }
@@ -36,7 +36,7 @@ describe("Movies endpoint", () => {
 
 
   describe("GET /movies ", () => {
-    /*describe("when it was unauthorized", () => {
+    describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
           .get(`/api/movies`)
@@ -47,21 +47,21 @@ describe("Movies endpoint", () => {
 
 
       });
-    });*/
+    });
     describe("when it was authorized", () => {
       beforeEach(async () => {
-        request (api)
-        .post("/api/users")
-        .send({
-          username: "user1",
-          password: "test1",
+        request(api)
+          .post("/api/users")
+          .send({
+            username: "user1",
+            password: "test1",
 
 
-        })
-        .expect(200)
-        .then(res => {
-          token = res.body.token;
-       });
+          })
+          .expect(200)
+          .then(res => {
+            token = res.body.token;
+          });
       });
       it("should return 20 movies and a status 200", () => {
         request(api)
@@ -80,7 +80,7 @@ describe("Movies endpoint", () => {
   });
 
   describe("GET /movies/:id", () => {
-    /*describe("when it was unauthorized", () => {
+    describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
 
@@ -92,7 +92,7 @@ describe("Movies endpoint", () => {
 
 
       });
-    });*/
+    });
     describe("when it was authorized", () => {
       describe("when the id is valid", () => {
         it("should return the matching movie", () => {
@@ -126,7 +126,7 @@ describe("Movies endpoint", () => {
 
 
 
- /*describe("POST /movies ", () => {
+  describe("POST /movies ", () => {
 
     describe("when it was authorized", () => {
       it("should return a 200 status and the confirmation message", () => {
@@ -157,11 +157,11 @@ describe("Movies endpoint", () => {
 
 
     });
-  }); */
+  });
 
 
   describe("GET /movies/:id/reviews", () => {
-    /*describe("when it was unauthorized", () => {
+    describe("when it was unauthorized", () => {
       it("should return errors", () => {
         return request(api)
 
@@ -173,7 +173,7 @@ describe("Movies endpoint", () => {
 
 
       });
-    });*/
+    });
     describe("when it was authorized", () => {
       describe("when the id is valid", () => {
         it("should return the matching movie", () => {
@@ -188,7 +188,7 @@ describe("Movies endpoint", () => {
             });
         });
       });
-      /*describe("when the id is invalid", () => {
+      describe("when the id is invalid", () => {
         it("should return the NOT found message", () => {
           request(api)
 
@@ -197,7 +197,7 @@ describe("Movies endpoint", () => {
             .set("Authorization", token)
             .expect(500);
         });
-      });*/
+      });
     });
   });
 
@@ -206,7 +206,7 @@ describe("Movies endpoint", () => {
   describe("DELETE /movies/:id ", () => {
 
     describe("when it was authorized", () => {
-            describe("when the id is valid", () => {
+      describe("when the id is valid", () => {
         it("should remove movie", () => {
           request(api)
 
@@ -214,7 +214,7 @@ describe("Movies endpoint", () => {
             .set("Accept", "application/json")
             .set("Authorization", token)
             .expect(200)
-            
+
         });
         after(() => {
           request(api)
@@ -225,7 +225,7 @@ describe("Movies endpoint", () => {
             .then((res) => {
               expect(res.body).to.be.a("array");
               expect(res.body.length).to.equal(19);
-  
+
             });
         });
       });

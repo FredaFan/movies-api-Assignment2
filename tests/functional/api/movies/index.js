@@ -128,7 +128,7 @@ describe("Movies endpoint", () => {
 
   describe("POST /movies ", () => {
 
-    describe("when it was authorized", () => {
+    describe("when it posts correctly", () => {
       it("should return a 200 status and the confirmation message", () => {
         request(api)
           .post("/api/movies")
@@ -156,6 +156,20 @@ describe("Movies endpoint", () => {
 
 
 
+    });
+
+    describe("when it does not post correctly", () => {
+      it("should return the error message", () => {
+        request(api)
+
+        .post("/api/movies")
+        .set("Accept", "application/json")
+        .set("Authorization", "BEARER" + token)
+        .send({
+          id: 24428,
+        })
+        .expect(405)
+      });
     });
   });
 

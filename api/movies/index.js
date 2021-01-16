@@ -24,5 +24,17 @@ router.get('/:id/reviews', (req, res, next) => {
 });
 
 
+router.post('/', async (req, res, next) => {
+  let newMovie = req.body;
+  if (newMovie && newMovie.title) {
+    !newMovie.id ? newMovie.id = Math.round(Math.random() * 10000) : newMovie;
+    await movieModel.create(newMovie).catch(next);
+    res.status(201).send(newMovie);
+  } else {
+    return res.status(401).json({ code: 401, msg: 'You should input the movie title.' 
+    });
+  }
+});
+
 
 export default router;

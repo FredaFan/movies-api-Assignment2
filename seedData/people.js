@@ -217,26 +217,7 @@ export const people = [
         "gender": 2,
         "id": 73968,
         "known_for": [
-            {
-                "adult": false,
-                "backdrop_path": "/doiUtOHzcxXFl0GVQ2n8Ay6Pirx.jpg",
-                "genre_ids": [
-                    28,
-                    12,
-                    14
-                ],
-                "id": 209112,
-                "media_type": "movie",
-                "original_language": "en",
-                "original_title": "Batman v Superman: Dawn of Justice",
-                "overview": "Fearing the actions of a god-like Super Hero left unchecked, Gotham City’s own formidable, forceful vigilante takes on Metropolis’s most revered, modern-day savior, while the world wrestles with what sort of hero it really needs. And with Batman and Superman at war with one another, a new threat quickly arises, putting mankind in greater danger than it’s ever known before.",
-                "poster_path": "/5UsK3grJvtQrtzEgqNlDljJW96w.jpg",
-                "release_date": "2016-03-23",
-                "title": "Batman v Superman: Dawn of Justice",
-                "video": false,
-                "vote_average": 5.9,
-                "vote_count": 14162
-            },
+            
             {
                 "adult": false,
                 "backdrop_path": "/69EFgWWPFWbRNHmQgYdSnyJ94Ge.jpg",
@@ -258,27 +239,7 @@ export const people = [
                 "vote_average": 6.6,
                 "vote_count": 11632
             },
-            {
-                "adult": false,
-                "backdrop_path": "/jorgjEk6a0bed6jdR5wu4S6ZvRm.jpg",
-                "genre_ids": [
-                    28,
-                    12,
-                    14,
-                    878
-                ],
-                "id": 141052,
-                "media_type": "movie",
-                "original_language": "en",
-                "original_title": "Justice League",
-                "overview": "Fuelled by his restored faith in humanity and inspired by Superman's selfless act, Bruce Wayne and Diana Prince assemble a team of metahumans consisting of Barry Allen, Arthur Curry and Victor Stone to face the catastrophic threat of Steppenwolf and the Parademons who are on the hunt for three Mother Boxes on Earth.",
-                "poster_path": "/eifGNCSDuxJeS1loAXil5bIGgvC.jpg",
-                "release_date": "2017-11-15",
-                "title": "Justice League",
-                "video": false,
-                "vote_average": 6.2,
-                "vote_count": 9999
-            }
+            
         ],
         "known_for_department": "Acting",
         "name": "Henry Cavill",
@@ -592,26 +553,7 @@ export const people = [
                 "vote_average": 7.9,
                 "vote_count": 21774
             },
-            {
-                "adult": false,
-                "backdrop_path": "/lmZFxXgJE3vgrciwuDib0N8CfQo.jpg",
-                "genre_ids": [
-                    12,
-                    28,
-                    878
-                ],
-                "id": 299536,
-                "media_type": "movie",
-                "original_language": "en",
-                "original_title": "Avengers: Infinity War",
-                "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
-                "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-                "release_date": "2018-04-25",
-                "title": "Avengers: Infinity War",
-                "video": false,
-                "vote_average": 8.3,
-                "vote_count": 20633
-            },
+            
             {
                 "adult": false,
                 "backdrop_path": "/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
@@ -643,25 +585,7 @@ export const people = [
         "gender": 1,
         "id": 1397778,
         "known_for": [
-            {
-                "adult": false,
-                "backdrop_path": "/9pkZesKMnblFfKxEhQx45YQ2kIe.jpg",
-                "genre_ids": [
-                    27,
-                    53
-                ],
-                "id": 381288,
-                "media_type": "movie",
-                "original_language": "en",
-                "original_title": "Split",
-                "overview": "Though Kevin has evidenced 23 personalities to his trusted psychiatrist, Dr. Fletcher, there remains one still submerged who is set to materialize and dominate all the others. Compelled to abduct three teenage girls led by the willful, observant Casey, Kevin reaches a war for survival among all of those contained within him — as well as everyone around him — as the walls between his compartments shatter apart.",
-                "poster_path": "/bqb9WsmZmDIKxqYmBJ9lj7J6hzn.jpg",
-                "release_date": "2017-01-09",
-                "title": "Split",
-                "video": false,
-                "vote_average": 7.3,
-                "vote_count": 13284
-            },
+            
             {
                 "adult": false,
                 "backdrop_path": "/ngBFDOsx13sFXiMweDoL54XYknR.jpg",
@@ -1390,27 +1314,8 @@ export const people = [
                 "video": false,
                 "vote_average": 6.5,
                 "vote_count": 9006
-            },
-            {
-                "adult": false,
-                "backdrop_path": "/jzdnhRhG0dsuYorwvSqPqqnM1cV.jpg",
-                "genre_ids": [
-                    28,
-                    80,
-                    53
-                ],
-                "id": 337339,
-                "media_type": "movie",
-                "original_language": "en",
-                "original_title": "The Fate of the Furious",
-                "overview": "When a mysterious woman seduces Dom into the world of crime and a betrayal of those closest to him, the crew face trials that will test them as never before.",
-                "poster_path": "/dImWM7GJqryWJO9LHa3XQ8DD5NH.jpg",
-                "release_date": "2017-04-12",
-                "title": "The Fate of the Furious",
-                "video": false,
-                "vote_average": 6.9,
-                "vote_count": 7909
             }
+            
         ],
         "known_for_department": "Acting",
         "name": "Charlize Theron",

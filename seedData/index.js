@@ -3,10 +3,14 @@ import movieModel from '../api/movies/movieModel';
 import genreModel from '../api/genres/genreModel';
 import personModel from '../api/people/personModel';
 import ucmovieModel from '../api/upcomingMovies/ucmovieModel';
+import trmovieModel from '../api/topRatedMovies/trmovieModel';
+import npmovieModel from '../api/nowplayingMovies/npmovieModel';
 import {movies} from './movies.js';
 import {genres} from './genres';
 import {people} from './people';
 import {ucmovies} from './ucmovies';
+import {trmovies} from './trmovies';
+import {npmovies} from './npmovies';
 const users = [
   {
     'username': 'user1',
@@ -75,5 +79,29 @@ export async function loadUsers() {
       console.info(`${ucmovies.length} Upcoming movies were successfully stored.`);
     } catch (err) {
       console.error(`failed to Load upcoming movies Data: ${err}`);
+    }
+  }
+
+  export async function loadTrmovies() {
+    console.log('load top rated movies data');
+    
+    try {
+      await trmovieModel.deleteMany();
+      await trmovieModel.collection.insertMany(trmovies);
+      console.info(`${trmovies.length} Top rated movies were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load top rated movies Data: ${err}`);
+    }
+  }
+
+  export async function loadNpmovies() {
+    console.log('load nowplaying movies data');
+    
+    try {
+      await npmovieModel.deleteMany();
+      await npmovieModel.collection.insertMany(npmovies);
+      console.info(`${npmovies.length} Now playing movies were successfully stored.`);
+    } catch (err) {
+      console.error(`failed to Load now playing movies Data: ${err}`);
     }
   }

@@ -5,11 +5,13 @@ import express from 'express';
 import moviesRouter from './api/movies';
 import bodyParser from 'body-parser';
 import './db';
-import {loadUsers, loadMovies, loadGenres,loadPeople, loadUcmovies} from './seedData';
+import {loadUsers, loadMovies, loadGenres,loadPeople, loadUcmovies,loadTrmovies, loadNpmovies } from './seedData';
 import usersRouter from './api/users';
 import genreRouter from './api/genres';
 import personRouter from './api/people';
 import ucmovieRouter from './api/upcomingMovies';
+import trmovieRouter from './api/topRatedMovies';
+import npmovieRouter from './api/nowplayingMovies';
 import loglevel from 'loglevel';
 if (process.env.NODE_ENV === 'test') {
   loglevel.setLevel('warn')
@@ -22,6 +24,8 @@ if (process.env.SEED_DB === 'true' && process.env.NODE_ENV === 'development') {
   loadGenres();
   loadPeople();
   loadUcmovies();
+  loadTrmovies();
+  loadNpmovies();
 }
 dotenv.config();
 
@@ -48,11 +52,13 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/movies', moviesRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/genres', genreRouter);
 app.use('/api/people', personRouter);
 app.use('/api/upcoming', ucmovieRouter);
+app.use('/api/top', trmovieRouter);
+app.use('/api/nowplaying', npmovieRouter);
 app.use(errHandler);
 
 let server = app.listen(port, () => {

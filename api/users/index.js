@@ -9,6 +9,7 @@ router.get('/', (req, res ,next) => {
     User.find().then(users =>  res.status(200).json(users)).catch(next);
 });
 
+
 // register
 
 // authenticate a user
@@ -88,6 +89,44 @@ router.post('/:userName/favourites', async (req, res, next) => {
 
   
 });
+
+router.post('/:userName/flags', async (req, res, next) => {
+  const newFlag = req.body.id;
+  const userName = req.params.userName;
+  const movie = await movieModel.findByMovieDBId(newFlag);
+  
+  const user = await User.findByUserName(userName).catch(next);
+  if (!user) return res.status(401).json({ code: 401, msg: 'User not found.' });
+  if (user.flags.indexOf(movie._id)===-1){
+    await user.flags.push(movie._id);
+  await user.save(); 
+  res.status(201).json(user); 
+  
+  }else{
+    return res.status(401).json({ code: 401, msg: 'The flag movie has existed in.' });
+  }
+  
+  
+
+  
+});
+
+router.delete('/:userName/flags/:id',  async (req, res, next) => {
+  const key =  parseInt(req.params.id);
+  const userName = req.params.userName;
+  const movie = await movieModel.findByMovieDBId(key);
+  
+  const user = await User.findByUserName(userName).catch(next);
+
+
+
+   if (user.flags.indexOf(movie._id) > -1) { 
+    await movieModel.remove(movie).catch(next);
+    res.status(200).send({message: `Deleted movie id: ${key}.`,status: 200});
+} else {
+  res.status(404).send({message: `Unable to find movie with id: ${key}.`, status: 404});
+  }
+});
   
   
 router.get('/:userName/favourites', (req, res, next) => {
@@ -97,7 +136,12 @@ router.get('/:userName/favourites', (req, res, next) => {
   ).catch(next);
 });
 
-
+router.get('/:userName/flags', (req, res, next) => {
+  const userName = req.params.userName;
+  User.findByUserName(userName).populate('flags').then(
+    user => res.status(201).json(user.flags)
+  ).catch(next);
+});
 
 
 export default router;

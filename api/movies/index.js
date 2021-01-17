@@ -2,7 +2,7 @@ import express from 'express';
 import movieModel from './movieModel';
 
 import {
-  getMovies, getMovie, getMovieReviews
+  getMovies, getMovie, getMovieReviews, getMovieSimilar, getMovieRecommendations
 } from '../tmdb-api';
 
 const router = express.Router();
@@ -36,6 +36,21 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.get('/:id/similar', async (req, res, next) => {
+  if (isNaN(req.params.id)) return res.status(500).json({ code: 500, msg: 'It is an invaild movie id.' });
+  const id = parseInt(req.params.id);
+  const movies = await getMovieSimilar(id);
+  if (movies == "") return res.status(404).json({ code: 404, msg: 'There is no similar movies of this movie' });
+  res.status(200).json(movies);
+});
+
+router.get('/:id/recommendations', async (req, res, next) => {
+  if (isNaN(req.params.id)) return res.status(500).json({ code: 500, msg: 'It is an invaild movie id.' });
+  const id = parseInt(req.params.id);
+  const movies = await getMovieRecommendations(id);
+  if (movies == "") return res.status(404).json({ code: 404, msg: 'There is no recommendations movies of this movie' });
+  res.status(200).json(movies);
+});
 
 
 

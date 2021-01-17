@@ -16,11 +16,12 @@ router.get('/:id', (req, res, next) => {
   movieModel.findByMovieDBId(id).then(movie => res.status(200).send(movie)).catch(next);
 });
 
-router.get('/:id/reviews', (req, res, next) => {
+router.get('/:id/reviews', async (req, res, next) => {
+  if (isNaN(req.params.id)) return res.status(500).json({ code: 500, msg: 'It is an invaild movie id.' });
   const id = parseInt(req.params.id);
-  getMovieReviews(id)
-  .then(reviews => res.status(200).send(reviews))
-  .catch((error) => next(error));
+  const movies = await getMovieReviews(id);
+  if (movies == "") return res.status(404).json({ code: 404, msg: 'There is no reviews of this movie' });
+  res.status(200).json(movies);
 });
 
 

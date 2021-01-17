@@ -90,6 +90,9 @@ Name: Jiayu Fan
  + Feature 5 - Add popular people api
  + Feature 6 - Add top rated movies api
  + Feature 7 - Add now playing movies api
+ + Feature 8 - Add similar movies api
+ + Feature 9 - Add recommendations movies api
+ + Feature 10 - Add reviews of the movies api
 
 ## Installation Requirements
 
@@ -127,7 +130,11 @@ GET
 
 /api/movies/{movieid} | Get a Movie
 
-/api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie 
+/api/movies/{movieid}/reviews | Get all reviews for movie  
+
+/api/movies/{movieid}/similar | Get all similar movies of the movie 
+
+/api/movies/{movieid}/recommendations | Get all recommendations movies of the movie
 
 /api/users |Gets a list of users | 
 
@@ -254,6 +261,57 @@ export const getPopularPerson = () => {
     '/api/people',{headers: {
       'Authorization': window.localStorage.getItem('token')
    }
+ }
+ ).then(res => res.json());
+};
+
+~~~
+
+
+
+
+
+~~~Javascript
+export const getMovieReviews = id => {
+  return fetch(
+    `/api/movies/${id}/reviews`,{headers: {
+      'Authorization': window.localStorage.getItem('token')
+   },
+
+ }
+ ).then(res => res.json());
+};
+
+~~~
+
+
+
+
+
+~~~Javascript
+export const getMovieSimilar = id => {
+  return fetch(
+    `/api/movies/${id}/similar`,{headers: {
+      'Authorization': window.localStorage.getItem('token')
+   },
+   method:'get'
+ }
+ ).then(res => res.json());
+};
+
+~~~
+
+
+
+
+
+~~~Javascript
+export const getMovieRecommendations = id => {
+  return fetch(
+    `/api/movies/${id}/recommendations`,{headers: {
+      'Authorization': window.localStorage.getItem('token')
+   },
+
  }
  ).then(res => res.json());
 };
